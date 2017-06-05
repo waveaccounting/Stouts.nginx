@@ -14,7 +14,7 @@
   when: nginx_apt_use_ppa_repo and ansible_distribution == "Ubuntu"
 
 - name: Install nginx
-  apt: name="nginx=1.8.0-1~precise" state=present update_cache=yes  # WAVE-PACKAGE::debian::nginx::1.8.0-1~precise::http://wiki.nginx.org/Install::Web server
+  apt: name="nginx=1.8.1-1~precise" state=present update_cache=yes  # WAVE-PACKAGE::debian::nginx::1.8.1-1~precise::http://wiki.nginx.org/Install::Web server
 
 - name: Install Dependencies
   apt: name=python-passlib
