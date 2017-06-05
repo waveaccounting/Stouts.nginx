@@ -6,9 +6,15 @@
   apt: name=python-pycurl
 
 - name: Add nginx repository
-  apt_repository: repo=ppa:nginx/stable
+  apt_repository: repo="deb http://nginx.org/packages/ubuntu/ precise nginx" state=present
   when: nginx_apt_use_ppa_repo and ansible_distribution == "Ubuntu"
 
+- name: Import nginx public key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present validate_certs=yes
+  when: nginx_apt_use_ppa_repo and ansible_distribution == "Ubuntu"
+
+- name: Install nginx
+  apt: name="nginx=1.8.1-1~precise" state=present update_cache=yes  # WAVE-PACKAGE::debian::nginx::1.8.1-1~precise::http://wiki.nginx.org/Install::Web server
+
 - name: Install Dependencies
-  apt: name={{item}}
-  with_items: [ nginx, python-passlib ] 
+  apt: name=python-passlib
